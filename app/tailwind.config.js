@@ -5,13 +5,10 @@ export default {
     extend: {
       boxShadow: {
         insetNeomorphisme:
-          "inset 2px 2px 8px #bababa, inset -2px -3px 8px #ffffff",
+          "inset 2px 2px 8px #B691D2, inset -2px -3px 8px rgba(255, 255, 255, 0.5)",
       },
       animation: {
         translateYBounce: "translateYBounce 1s 1 ease-in-out",
-      },
-      fontFamily: {
-        exo: ["Exo 2", "sans-serif"],
       },
     },
   },
