@@ -3,6 +3,7 @@ const router = express.Router();
 
 import UrlModel from "../models/url";
 import { nanoid } from "nanoid";
+import { API_URL } from "../config";
 
 const BAD_REQUEST = "BAD_REQUEST";
 const NOT_FOUND = "NOT_FOUND";
@@ -14,10 +15,10 @@ router.post("/", async (req, res, next) => {
     const longUrl = req.body.url;
     const obj = { longUrl };
     const data = await UrlModel.findOne(obj);
-    if (data) return res.status(200).send({ ok: true, data });
+    if (data) return res.status(200).send({ ok: true, data: { ...data, shortUrl: API_URL + "/" + data.shortUrl } });
     const shortUrl = nanoid(6);
-    const newObj = await UrlModel.create({ longUrl, shortUrl });
-    return res.status(200).send({ ok: true, data: newObj });
+    const newObj: any = await UrlModel.create({ longUrl, shortUrl });
+    return res.status(200).send({ ok: true, data: { ...newObj, shortUrl: API_URL + "/" + newObj.shortUrl } });
   } catch (error) {
     next(error);
   }
